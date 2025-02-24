@@ -13,10 +13,16 @@
 - install axios
 - CORS - install cors in backkend => add middleware to with configuration: origin, credentials: true
 - whenever you're making a request to the backend, pass axios {withCredentials: true}
+- install redux-tooolkit
+- create redux store
+- configureStore => Provider => createSlice => add reducer to store.
+- login and see update as soon as user logs in
+- navbar should update as soon as user logs in
+- refactor our code add constants file + create a component folder
 
-body
-Navbar
-Route=/ => Feed
-Route=/login => Login
-Route=/connections => Connections
-Route=/profile => Profile
+  body
+  Navbar
+  Route=/ => Feed
+  Route=/login => Login
+  Route=/connections => Connections
+  Route=/profile => Profile
