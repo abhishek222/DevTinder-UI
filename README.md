@@ -19,6 +19,10 @@
 - login and see update as soon as user logs in
 - navbar should update as soon as user logs in
 - refactor our code add constants file + create a component folder
+- you should not be access other routes without login.
+- If token is not present, redirect user to login page
+- Logout feature
+- Profile
 
   body
   Navbar
