@@ -29,9 +29,6 @@
 - New Page - See all my connections
 - New Page - see all connection requests
 - feature - accept or reject connection request
-
-remaining -
-
 - send/ ignore request
 - signup
 - e2e test

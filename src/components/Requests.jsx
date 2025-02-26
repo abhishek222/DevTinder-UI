@@ -36,7 +36,7 @@ const Requests = () => {
 
   if (requests.length === 0) {
     return (
-      <div className="flex text-xl font-bold justify-center">
+      <div className="flex justify-center items-center h-screen">
         No connections request found
       </div>
     );
