@@ -24,8 +24,12 @@
 - Logout feature
 - Get the feed and add the feed in the store
 - build the user card on feed
+- Edit profile feature
+- show toast Message on save of profile
+- See all my connections
+- see all connection requests
 
-  body
+- body
   Navbar
   Route=/ => Feed
   Route=/login => Login

@@ -1,4 +1,4 @@
-const UserCard = ({ user }) => {
+const UserCard = ({ user, showButtons = true }) => {
   const { firstName, lastName, photoUrl, about, age, gender } = user;
   return (
     <div className="card bg-base-100 w-96 shadow-xl">
@@ -9,10 +9,12 @@ const UserCard = ({ user }) => {
         <h2 className="card-title">{firstName + " " + lastName}</h2>
         {age && gender && <p>{age + ", " + gender}</p>}
         <p>{about}</p>
-        <div className="card-actions justify-center">
-          <button className="btn btn-primary">Ignore</button>
-          <button className="btn btn-secondary">Interested</button>
-        </div>
+        {showButtons && (
+          <div className="card-actions justify-center">
+            <button className="btn btn-primary">Ignore</button>
+            <button className="btn btn-secondary">Interested</button>
+          </div>
+        )}
       </div>
     </div>
   );
