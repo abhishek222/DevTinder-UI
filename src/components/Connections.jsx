@@ -27,7 +27,7 @@ const Connections = () => {
   return (
     <>
       <h1 className="flex text-2xl font-bold justify-center">Connections</h1>
-      <div className="flex justify-center flex-direction-column mt-10 h-[400px] overflow-y-auto">
+      <div className="flex justify-center flex-direction-column mt-10 h-[400px] overflow-y-auto gap-5">
         {connections.map((conn) => {
           return <UserCard key={conn._id} user={conn} showButtons={false} />;
         })}

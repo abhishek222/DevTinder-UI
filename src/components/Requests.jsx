@@ -9,11 +9,24 @@ const Requests = () => {
   const requests = useSelector((store) => store.requests);
   const dispatch = useDispatch();
 
+  const reviewRequest = async (status, id) => {
+    try {
+      await axios.post(
+        BASE_URL + "/request/review/" + status + "/" + id,
+        {},
+        { withCredentials: true }
+      );
+      fetchRequests();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const fetchRequests = async () => {
     const response = await axios.get(BASE_URL + "/user/requests/received", {
       withCredentials: true,
     });
-    dispatch(addRequests(response?.data?.data));
+    dispatch(addRequests(response?.data?.requests));
   };
   useEffect(() => {
     fetchRequests();
@@ -22,7 +35,11 @@ const Requests = () => {
   if (!requests) return;
 
   if (requests.length === 0) {
-    return <div>No connections request found</div>;
+    return (
+      <div className="flex text-xl font-bold justify-center">
+        No connections request found
+      </div>
+    );
   }
   return (
     <div className="flex flex-col min-h-screen">
@@ -30,13 +47,27 @@ const Requests = () => {
       {requests.map((conn) => {
         return (
           <div
-            className="flex flex-direction-column justify-center items-center gap-5 mt-5 overflow-y-auto flex-1 overflow-auto "
+            className="flex flex-direction-column justify-center items-center gap-5 overflow-auto min-h-screen "
             key={conn._id}
           >
-            <UserCard key={conn._id} user={conn} showButtons={false} />
+            <UserCard
+              key={conn.fromUserId._id}
+              user={conn.fromUserId}
+              showButtons={false}
+            />
             <div className="card-actions justify-center">
-              <button className="btn btn-primary">Accept</button>
-              <button className="btn btn-secondary">Reject</button>
+              <button
+                className="btn btn-primary"
+                onClick={() => reviewRequest("accepted", conn._id)}
+              >
+                Accept
+              </button>
+              <button
+                className="btn btn-secondary"
+                onClick={() => reviewRequest("rejected", conn._id)}
+              >
+                Reject
+              </button>
             </div>
           </div>
         );
