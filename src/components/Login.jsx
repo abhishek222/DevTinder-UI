@@ -17,7 +17,7 @@ const Login = () => {
   const [age, setAge] = useState("");
   const [about, setAbout] = useState("");
   const [photoUrl, setPhotoUrl] = useState("");
-  const [gender, setGender] = useState("");
+  const [gender, setGender] = useState("male");
   const [successMessage, setSuccessMessage] = useState(false);
   const handleLogin = async () => {
     try {
