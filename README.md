@@ -49,3 +49,12 @@
 
 - create chat ui with target user id
 - setup socket.io in backend
+- npm i socket.io
+- setup frontend socket.io-client
+- initialize the chat
+- createSocketConnection
+- Listen to events
+- Homework: improve the UI
+- Homework: Fix Security Bug - auth in websocket
+- Homework: fix bug - If I'm not friend with the user, I should not be able to chat with them
+- homework: Feat: Show Green Dot for online users/ last seen

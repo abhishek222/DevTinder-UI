@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { createSocketConnection } from "../utils/socket";
 import { useSelector } from "react-redux";
 import { Socket } from "socket.io-client";
+import { BASE_URL } from "../utils/constant";
+import axios from "axios";
 
 const Chat = () => {
   const { targetUserId } = useParams();
@@ -17,20 +19,65 @@ const Chat = () => {
     const socket = createSocketConnection();
     socket.emit("join_room", { currentUserId, targetUserId });
     socket.on("receive_message", (data) => {
-      setMessages((messages) => [...messages, { ...data }]);
+      console.log(data);
+      setMessages((messages) => [...messages, data]);
     });
 
     return () => {
       socket.disconnect();
     };
   }, [currentUserId, targetUserId]);
+
+  const formatDate = (chatDate) => {
+    const date = new Date(chatDate);
+    const formattedDate = `${date.getDate().toString().padStart(2, "0")}/${(
+      date.getMonth() + 1
+    )
+      .toString()
+      .padStart(2, "0")}/${date.getFullYear()} ${date
+      .getHours()
+      .toString()
+      .padStart(2, "0")}:${date.getMinutes().toString().padStart(2, "0")}:${date
+      .getSeconds()
+      .toString()
+      .padStart(2, "0")}`;
+
+    return formattedDate;
+  };
+
+  const fetchChatHistory = async () => {
+    try {
+      const response = await axios.get(BASE_URL + `/chat/${targetUserId}`, {
+        withCredentials: true,
+      });
+      const chatHistory = response?.data?.messages.map((msg) => {
+        return {
+          sender: msg.sender._id,
+          senderName: msg.sender.firstName,
+          senderPhoto: msg.sender.photoUrl,
+          message: msg.message,
+          time: formatDate(msg.createdAt),
+        };
+      });
+      setMessages(chatHistory);
+    } catch (error) {
+      console.error("Error fetching chat history:", error);
+    }
+  };
+  useEffect(() => {
+    fetchChatHistory();
+  }, []);
   const sendMessage = () => {
     if (!currentUser._id || !targetUserId) return;
     const socket = createSocketConnection();
     socket.emit("send_message", {
       currentUserId,
       targetUserId,
-      message: newMessage,
+      message: newMessage.message,
+      time: new Date().toLocaleTimeString(),
+      sender: currentUserId,
+      senderName: currentUser.name,
+      senderPhoto: currentUser.photoUrl,
     });
     setNewMessage((prev) => ({
       ...prev,
