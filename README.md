@@ -39,3 +39,8 @@
   Route=/login => Login
   Route=/connections => Connections
   Route=/profile => Profile
+
+# RazorPay payment gateway integration
+
+- signnup on razorpay and complete KYC
+- created UI for premium page
