@@ -44,3 +44,8 @@
 
 - signnup on razorpay and complete KYC
 - created UI for premium page
+
+# Real time Chat using websocket( socket.io)
+
+- create chat ui with target user id
+- setup socket.io in backend

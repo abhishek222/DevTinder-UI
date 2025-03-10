@@ -4,6 +4,7 @@ import { BASE_URL } from "../utils/constant";
 import UserCard from "./UserCard";
 import { useSelector, useDispatch } from "react-redux";
 import { addConnection } from "../utils/connectionSlice";
+import { Link } from "react-router-dom";
 
 const Connections = () => {
   const connections = useSelector((store) => store.connection);
@@ -33,7 +34,14 @@ const Connections = () => {
       <h1 className="flex text-2xl font-bold justify-center">Connections</h1>
       <div className="flex justify-center flex-direction-column mt-10 h-[400px] overflow-y-auto gap-5">
         {connections.map((conn) => {
-          return <UserCard key={conn._id} user={conn} showButtons={false} />;
+          return (
+            <div key={conn._id} className="flex justify-center gap-5">
+              <UserCard key={conn._id} user={conn} showButtons={false} />
+              <Link to={"/chat/" + conn._id}>
+                <button className="btn btn-primary">Chat</button>
+              </Link>
+            </div>
+          );
         })}
       </div>
     </>
